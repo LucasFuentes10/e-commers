@@ -31,19 +31,6 @@
 
     <main>
         <section>
-            <h2>Agregar Nueva Mercadería</h2>
-            <form action="?action=save_product" method="POST">
-                <input type="hidden" name="token" value="<?php echo $_SESSION['token'] ??= bin2hex(random_bytes(32)); ?>">
-                <div class="grid">
-                    <input type="text" name="name" placeholder="Nombre del producto" required>
-                    <input type="number" name="price" placeholder="Precio" step="0.01" required>
-                    <input type="number" name="stock" placeholder="Stock inicial" required>
-                </div>
-                <button type="submit">Guardar Producto</button>
-            </form>
-        </section>
-
-        <section>
             <h2>Inventario Actual</h2>
            <table>
                 <thead>

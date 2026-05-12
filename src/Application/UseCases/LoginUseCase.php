@@ -1,5 +1,4 @@
 <?php
-// src/Application/UseCases/LoginUseCase.php
 namespace App\Application\UseCases;
 
 class LoginUseCase {

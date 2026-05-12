@@ -5,8 +5,9 @@ namespace App\Infrastructure\Persistence;
 
 use App\Infrastructure\Database;
 use PDO;
+use App\Domain\Interfaces\CategoryRepositoryInterface;
 
-class MySQLCategoryRepository {
+class MySQLCategoryRepository implements CategoryRepositoryInterface {
     private $db;
 
     public function __construct() {

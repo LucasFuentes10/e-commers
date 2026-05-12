@@ -9,7 +9,11 @@ class Product {
         public ?int $id,
         public string $name,
         public float $price,
-        public int $stock
+        public int $stock,
+        public ?int $categoryId = null,
+        public ?string $description = null,
+        public int $stockMinimo = 0,
+        public ?int $supplierId = null
     ) {
         $this->validate();
     }

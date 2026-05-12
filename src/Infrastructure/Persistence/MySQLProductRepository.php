@@ -5,6 +5,7 @@ namespace App\Infrastructure\Persistence;
 
 use App\Infrastructure\Database;
 use App\Domain\Entities\Product;
+use App\Domain\Interfaces\ProductRepositoryInterface;
 use PDO;
 // Verifica que diga "c.name" y que la tabla sea "categories c"
 $sql = "SELECT p.*, c.name as category_name 
@@ -37,16 +38,16 @@ class MySQLProductRepository {
      */
     // src/Infrastructure/Persistence/MySQLProductRepository.php
 
-    public function save($name, $price, $stock, $categoryId): bool {
+    public function save(Product $product): bool {
         $sql = "INSERT INTO products (name, price, stock, category_id) 
                 VALUES (:name, :price, :stock, :cat_id)";
         
         $stmt = $this->db->prepare($sql);
         return $stmt->execute([
-            'name'   => $name,
-            'price'  => $price,
-            'stock'  => $stock,
-            'cat_id' => $categoryId
+            'name' => $product->name,
+            'price' => $product->price,
+            'stock' => $product->stock,
+            'cat_id' => $product->categoryId
         ]);
     }
 
