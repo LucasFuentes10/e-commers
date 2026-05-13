@@ -190,9 +190,6 @@ try {
         // =========================
         // MY ORDERS
         // =========================
-        case 'my_orders':
-        $productController->myOrders();
-        break;
 
         case 'order_success':
         $productController->orderSuccess();
