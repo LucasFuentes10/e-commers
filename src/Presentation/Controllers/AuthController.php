@@ -1,5 +1,5 @@
 <?php
-
+// src/Presentation/Controllers/AuthController.php
 namespace App\Presentation\Controllers;
 
 use App\Application\UseCases\LoginUseCase;
@@ -16,12 +16,12 @@ class AuthController
 
     public function loginView()
     {
-        include '../src/Presentation/views/login.php';
+        include __DIR__ . '/../Views/login.php';
     }
 
     public function registerView()
     {
-        include '../src/Presentation/views/register.php';
+        include __DIR__ . '/../Views/register.php';
     }
 
     public function login()
@@ -50,7 +50,7 @@ class AuthController
 
         $error = "Email o contraseña incorrectos.";
 
-        include '../src/Presentation/views/login.php';
+        include '../src/Presentation/Views/login.php';
     }
 
     public function register()

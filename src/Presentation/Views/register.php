@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+    <!-- src/Presentation/Views/register.php -->
 <head>
     <meta charset="UTF-8">
     <title>Registro - Sistema de Mercadería</title>

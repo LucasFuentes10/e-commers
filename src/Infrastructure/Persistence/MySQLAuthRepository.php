@@ -5,10 +5,10 @@ namespace App\Infrastructure\Persistence;
 use App\Infrastructure\Database;
 
 class MySQLAuthRepository {
-    private $db;
+    private $pdo;
 
     public function __construct() {
-        $this->db = Database::getConnection();
+        $this->pdo = Database::getConnection();
     }
 
     public function findByEmail(string $email): ?array {
@@ -16,7 +16,7 @@ class MySQLAuthRepository {
                 FROM users u 
                 JOIN roles r ON u.role_id = r.id 
                 WHERE u.email = :email";
-        $stmt = $this->db->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
         $stmt->execute(['email' => $email]);
         $user = $stmt->fetch();
         
@@ -25,7 +25,7 @@ class MySQLAuthRepository {
     public function save(array $data): bool {
         $sql = "INSERT INTO users (username, email, password, role_id) 
                 VALUES (:username, :email, :password, :role_id)";
-        $stmt = $this->db->prepare($sql);
+        $stmt = $this->pdo->prepare($sql);
         return $stmt->execute($data);
     }
 }

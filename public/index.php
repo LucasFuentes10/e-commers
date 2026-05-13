@@ -1,6 +1,8 @@
 <?php
 // public/index.php
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
 // =========================
 // CONFIGURACIÓN GENERAL
 // =========================
@@ -131,6 +133,17 @@ try {
             $productController->viewCart();
             break;
 
+        case 'remove_from_cart':
+            $productController->removeFromCart();
+            break;
+
+        case 'checkout':
+            $productController->checkout();
+            break;
+
+        case 'my_orders':
+            $productController->myOrders();
+            break;
         // =========================
         // USERS
         // =========================
@@ -143,6 +156,51 @@ try {
             $userController->delete();
             break;
 
+        // =========================
+        // ADMIN - GESTIÓN DE USUARIOS AVANZADA
+        // =========================
+        case 'admin_add_user':
+            $userController->addUserForm();
+            break;
+
+        case 'admin_do_add_user':
+            $userController->addUser();
+            break;
+
+        // =========================
+        // SUPPLIERS
+        // =========================
+
+        case 'list_suppliers':
+            $productController->listSuppliers();   // reutilizamos el controller por simplicidad
+            break;
+
+        case 'add_supplier_form':
+            $productController->addSupplierForm();
+            break;
+
+        case 'do_save_supplier':
+            $productController->saveSupplier();
+            break;
+
+        case 'delete_supplier':
+            $productController->deleteSupplier();
+            break;
+
+        // =========================
+        // MY ORDERS
+        // =========================
+        case 'my_orders':
+        $productController->myOrders();
+        break;
+
+        case 'order_success':
+        $productController->orderSuccess();
+        break;
+
+        case 'download_pdf':
+        $productController->downloadPDF();
+        break;
         // =========================
         // DEFAULT
         // =========================

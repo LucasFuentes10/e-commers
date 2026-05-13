@@ -1,4 +1,6 @@
 <?php
+// src/Application/UseCases/AddProductUseCase.php
+
 namespace App\Application\UseCases;
 
 use App\Domain\Entities\Product;
@@ -10,11 +12,26 @@ class AddProductUseCase {
         $this->repository = $repository;
     }
 
-    public function execute($name, $price, $stock) {
-        // La entidad Product valida internamente (precio > 0, etc.)
-        $product = new Product(null, $name, $price, $stock);
+    public function execute(
+        string $name, 
+        float $price, 
+        int $stock, 
+        ?int $categoryId = null, 
+        ?int $supplierId = null, 
+        ?string $description = null
+    ): bool { 
         
-        // El repositorio lo guarda en la DB
-        return $this->repository->save($product);
+        $product = new Product(
+            null, 
+            $name, 
+            $price, 
+            $stock, 
+            $categoryId, 
+            $description, 
+            0, 
+            $supplierId
+        );
+        
+        return $this->repository->save($product); 
     }
 }

@@ -1,5 +1,5 @@
 <?php
-
+// src/Presentation/Controllers/UserController.php
 namespace App\Presentation\Controllers;
 
 class UserController
@@ -22,7 +22,7 @@ class UserController
 
         $users = $this->userRepo->getAll();
 
-        include '../src/Presentation/views/manage_users.php';
+        include __DIR__ . '/../Views/manage_users.php';
     }
 
     public function delete()
@@ -41,6 +41,45 @@ class UserController
         }
 
         header("Location: index.php?action=manage_users");
+        exit;
+    }
+
+    public function addUserForm()
+    {
+        if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'Admin') {
+            die("No autorizado");
+        }
+
+        include __DIR__ . '/../Views/admin_add_user.php';
+    }
+
+    public function addUser()
+    {
+        if (!isset($_SESSION['user_role']) || $_SESSION['user_role'] !== 'Admin') {
+            die("No autorizado");
+        }
+
+        $username = trim($_POST['username'] ?? '');
+        $email    = trim($_POST['email'] ?? '');
+        $password = $_POST['password'] ?? '';
+        $role_id  = (int)($_POST['role_id'] ?? 3); // 3 = Usuario por defecto
+
+        if (empty($username) || empty($email) || empty($password)) {
+            $_SESSION['error'] = "Todos los campos son obligatorios.";
+            header("Location: index.php?action=admin_add_user");
+            exit;
+        }
+
+        $registerUseCase = new RegisterUserUseCase($this->userRepo);
+
+        try {
+            $registerUseCase->execute($username, $email, $password, $role_id);
+            $_SESSION['message'] = "Usuario creado correctamente.";
+            header("Location: index.php?action=manage_users");
+        } catch (\Exception $e) {
+            $_SESSION['error'] = $e->getMessage();
+            header("Location: index.php?action=admin_add_user");
+        }
         exit;
     }
 }

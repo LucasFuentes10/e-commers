@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+    <!-- src/Presentation/Views/login.php -->
 <head>
     <meta charset="UTF-8">
     <title>Login - Sistema de Mercadería</title>

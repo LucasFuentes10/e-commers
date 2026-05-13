@@ -20,6 +20,10 @@ class RegisterUserUseCase {
 
         // 3. Guardar a través del repositorio
         // Bien: Pásale las 3 variables por separado
-        return $this->userRepo->save($username, $email, $hashedPassword);
+        return $this->userRepo->save([
+            'username' => $username,
+            'email' => $email,
+            'password' => $hashedPassword
+        ]);
     }
 }

@@ -1,5 +1,5 @@
 <?php
-
+// src/Domain/Interfaces/ProductRepositoryInterface.php
 namespace App\Domain\Interfaces;
 
 use App\Domain\Entities\Product;

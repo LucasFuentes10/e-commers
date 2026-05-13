@@ -8,10 +8,10 @@ use PDO;
 use App\Domain\Interfaces\CategoryRepositoryInterface;
 
 class MySQLCategoryRepository implements CategoryRepositoryInterface {
-    private $db;
+    private $pdo;
 
     public function __construct() {
-        $this->db = Database::getConnection();
+        $this->pdo = Database::getConnection();
     }
 
     /**
@@ -19,7 +19,7 @@ class MySQLCategoryRepository implements CategoryRepositoryInterface {
      */
     public function getAll(): array {
         $sql = "SELECT * FROM categories ORDER BY name ASC";
-        $stmt = $this->db->query($sql);
+        $stmt = $this->pdo->query($sql);
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }

@@ -5,8 +5,8 @@ namespace App\Infrastructure\Persistence;
 
 use App\Infrastructure\Database;
 use PDO;
-
-class MySQLUserRepository {
+use App\Domain\Interfaces\UserRepositoryInterface;
+class MySQLUserRepository implements UserRepositoryInterface{
     private $db;
 
     public function __construct() {
@@ -33,16 +33,17 @@ class MySQLUserRepository {
     /**
      * Guarda un nuevo usuario en la base de datos (Registro)
      */
-   public function save($username, $email, $password): bool {
-            // El 3 corresponde al ID del rol 'Usuario' que acabamos de crear
-            $sql = "INSERT INTO users (username, email, password, role_id) 
-                    VALUES (:username, :email, :password, 3)"; 
-            
-            $stmt = $this->db->prepare($sql);
-            return $stmt->execute([
-                'username' => $username,
-                'email'    => $email,
-                'password' => $password
+   public function save(array $userData): bool {
+
+        $sql = "INSERT INTO users (username, email, password, role_id) 
+                VALUES (:username, :email, :password, 3)";
+
+        $stmt = $this->db->prepare($sql);
+
+        return $stmt->execute([
+            'username' => $userData['username'],
+            'email'    => $userData['email'],
+            'password' => $userData['password']
         ]);
     }
 

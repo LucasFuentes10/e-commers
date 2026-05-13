@@ -1,5 +1,6 @@
 <?php
 // src/Domain/Entities/Product.php
+
 namespace App\Domain\Entities;
 
 use Exception;
@@ -23,7 +24,7 @@ class Product {
             throw new Exception("El nombre del producto no puede estar vacío.");
         }
         if ($this->price < 0) {
-            throw new Exception("El precio no puede ser un valor negativo.");
+            throw new Exception("El precio no puede ser negativo.");
         }
         if ($this->stock < 0) {
             throw new Exception("El stock no puede ser negativo.");
